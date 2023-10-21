@@ -1,0 +1,27 @@
+
+
+:root {
+    --brand-primary: #0768AC;
+    --brand-secondary: #03C180;
+    --bg_default: #FFFFFF;
+    --pg_body: #F0F9FF;
+    --lines-color: #DDDDDD;
+    --body-text: #333333;
+    --heart-color: #DC143C;
+    --bg_default-dark-mode: #1A1A1A;
+    --bg_body-dark-mode: #282828;
+    --lines-color-dark-mode: #000000;
+    --body-text-drak-mode: #EDEDED;
+    --heart-color-dark-mode: #DC143C;
+    --font-weight-light: 200;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+    --m: 16px;
+    --xs: calc(var(--m) * 0.25);
+    --sm: calc(var(--m) * 0.7);
+    --md: var(--m);
+    --lg: calc(var(--m) * 1.2);
+    --xl: calc(var(--m) * 2);
+    --xxl: calc(var(--m) * 3);
+    /*    */
+}

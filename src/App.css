@@ -1,0 +1,54 @@
+
+/* reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+li {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+:root {
+    --brand-primary-color: var(--brand-primary);
+    --brand-secondry-color: var(--brand-secondary);
+    --background-default : var(--bg_default);
+    --background-body: var(--pg_body);
+    --lines-color-var: var(--lines-color);
+    --body-text-var: var(--body-text);
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--background-body);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-default : var(--bg_default-dark-mode);
+        --background-body: var(--bg_body-dark-mode);
+        --lines-color-var: var(--lines-color-dark-mode);
+        --body-text-var: var(--body-text-drak-mode);
+    }
+
+}
+
+/*Dark Mode colors*/
+.dark-mode {
+    --background-default : var(--bg_default-dark-mode);
+    --background-body: var(--bg_body-dark-mode);
+    --lines-color-var: var(--lines-color-dark-mode);
+    --body-text-var: var(--body-text-drak-mode);
+}

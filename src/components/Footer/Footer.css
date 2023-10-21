@@ -1,0 +1,9 @@
+
+
+/*Footer Style*/
+.copyrights {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    color: var(--body-text-var);
+}
