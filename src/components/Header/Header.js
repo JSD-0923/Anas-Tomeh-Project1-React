@@ -3,7 +3,12 @@ import './Header.css'
 import '../../css/varibels.css'
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-const Header = ({toggleDarkMode, isDarkModeTheme, onShowModal}) => {
+import WelcomeBar from "../WelcomeBar/WelcomeBar";
+import Button from "../../utils/Button/Button";
+import {primaryButtonStyles} from "../../utils/Button/ButtonStyles";
+const Header = (props) => {
+
+    const {toggleDarkMode, isDarkModeTheme, onShowModal} = props
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [isDarkMode, setIsDarkMode] = useState(isDarkModeTheme);
@@ -24,31 +29,29 @@ const Header = ({toggleDarkMode, isDarkModeTheme, onShowModal}) => {
 
     }, [])
 
+
     return (
         <header className="header">
-            <div className="header-first-part">
-               <Link to={'/Anas-Tomeh-Project1-React'}>
-                   <h1>Web Topics</h1>
-               </Link>
-                <div className="header-btns">
-                        <button className="button"  aria-label="dark mode" onClick={handleDarkModeToggle}>
-                            {!isDarkMode ? '☾' : '☼'}  {screenWidth < 425 ? '' :  !isDarkMode ? 'Dark Mode' : 'Light Mode'}
-                        </button>
+            <div className="header-container">
+                <Link to="Anas-Tomeh-Project1-React/">
+                    <h1>Web Topics</h1>
+                </Link>
 
-                        <button className="button" aria-label="favourite" onClick={handleDisplayingModalLocal} >
-                            ♡ {screenWidth < 425 ? '' : 'Favourites'}
-                        </button>
+                <div className="header-btns">
+                    <Button
+                    label={`${!isDarkMode ? '☾' : '☼'} ${screenWidth < 425 ? '' :  !isDarkMode ? 'Dark Mode' : 'Light Mode'}`}
+                    ariaLabel={"dark mode"}
+                    onClick={handleDarkModeToggle}
+                    style={primaryButtonStyles}
+                    />
+
+                    <Button
+                    label={`♡  ${screenWidth < 425 ? '' : 'Favourites'}`}
+                    ariaLabel={"favourite"}
+                    onClick={handleDisplayingModalLocal}
+                    style={primaryButtonStyles}
+                    />
                 </div>
-            </div>
-            <div className="header-second-part">
-                <section className="top-page-design" aria-label="header design">
-                    <div className="triangle"></div>
-                    <div className="triangle-2"></div>
-                </section>
-                <section className="welcome-title" aria-label="welcome title">
-                    <h2>Welcome to our website!</h2>
-                    <p>We have a new design that's fresh, modern, and easy to use.</p>
-                </section>
             </div>
         </header>
     )

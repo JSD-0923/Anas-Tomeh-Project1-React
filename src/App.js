@@ -5,9 +5,11 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import DetailsPage from "./pages/Details Page/DetailsPage";
 import {useEffect, useState} from "react";
 import Modal from "./utils/Modal/Modal";
-import FavouriteTopicCard from "./components/FavouriteTopicCard/FavouriteTopicCard";
+import FavouriteTopicCard from "./components/Cards/FavouriteTopicCard/FavouriteTopicCard";
 import NotFoundPage from "./pages/Not Found Page/NotFoundPage";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import WelcomeBar from "./components/WelcomeBar/WelcomeBar";
 
 function App() {
 
@@ -61,40 +63,30 @@ function App() {
 
     return (
         <>
-            
             <BrowserRouter>
+            <Header
+                toggleDarkMode={toggleDarkMode}
+                isDarkModeTheme={isDarkModeTheme}
+                onShowModal={handleDisplayingModal}
+            />
+            <WelcomeBar/>
+
                 <Routes>
                     {/*Anas-Tomeh-Project1-React is added for the path for deploying using GitHub pages*/}
-                    <Route exact path="Anas-Tomeh-Project1-React/" element={
-                        <HomePage
-                        toggleDarkMode={toggleDarkMode}
-                        isDarkModeTheme={isDarkMode}
-                        onShowModal={handleDisplayingModal}
-                        />
-                    }
+                    <Route exact path="Anas-Tomeh-Project1-React/" element={<HomePage/>}
                     />
                     {/*Anas-Tomeh-Project1-React is added for the path for deploying using GitHub pages*/}
-                    <Route exact path="Anas-Tomeh-Project1-React/details/:id" element={
-                        <DetailsPage
-                        toggleDarkMode={toggleDarkMode}
-                        isDarkModeTheme={isDarkMode}
-                        onFavouriteTopics={handelFavouriteTopics}
-                        onShowModal={handleDisplayingModal}
-                    />}
+                    <Route exact path="Anas-Tomeh-Project1-React/details/:id" element={<DetailsPage onFavouriteTopics={handelFavouriteTopics}/>}
                     />
-                    <Route path="*" element={
-                        <NotFoundPage
-                        toggleDarkMode={toggleDarkMode}
-                        isDarkModeTheme={isDarkMode}
-                        onFavouriteTopics={handelFavouriteTopics}
-                        onShowModal={handleDisplayingModal}
-                    />} />
+                    <Route path="*" element={<NotFoundPage/>} />
                 </Routes>
 
-            </BrowserRouter>
+
+            <Footer/>
             <Modal isOpen={modalShow} title={'My Favourite Topics'}>
                 <FavouriteTopicCard favouriteTopics={favouriteTopics}/>
             </Modal>
+            </BrowserRouter>
         </>
     );
 }

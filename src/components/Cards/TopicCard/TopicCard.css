@@ -1,25 +1,8 @@
-.search-results {
-    background-color: var(--background-body);
-    max-width: 1400px;
-    overflow-x: hidden;
-    flex-wrap: wrap;
-}
 
-.number-of-results {
-    margin: 0 0 16px 16px;
-    color: var(--body-text-var);
-    align-self: flex-start;
-}
 
-.results {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 1400px;
-}
 
 .topic-card{
-    width: 220px;
+    width: 250px;
     height: 260px;
     background-color: var(--background-default);
     border-radius: 0.5rem;
@@ -89,4 +72,11 @@
     margin-left: 16px;
     margin-bottom: 11px;
     padding-top: 12px;
+}
+
+@media screen and (max-width: 600px) {
+    .topic-card {
+        width: 80vw;
+        margin-left: 10%;
+    }
 }

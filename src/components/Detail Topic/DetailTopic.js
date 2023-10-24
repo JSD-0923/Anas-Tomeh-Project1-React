@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Error from "../../utils/Error/Error";
 import LoadingIndicator from "../../utils/LoadingIndicator/LoadingIndicator";
+import Button from "../../utils/Button/Button";
+import {buttonCustomStyle, secondaryButtonStyle} from "../../utils/Button/ButtonStyles";
 const DetailTopic = ({onFavouriteTopics}) => {
 
     const [topic, setTopic] = useState()
@@ -74,9 +76,11 @@ const DetailTopic = ({onFavouriteTopics}) => {
                                     <h2 className={'details-author-name'}>{topic.topic} by <a>{topic.name}</a></h2>
                                     <div className="add-to-favorite-box">
                                         <h2>Interested about this topic?</h2>
-                                        <button id="add-to-favourite" onClick={handelAddToFavourite}>
-                                            {!isTopicInFavourites ? 'Add to Favourites ♡ ' : 'Remove From Favourites ♡ '}
-                                        </button>
+                                        <Button
+                                        label={!isTopicInFavourites ? 'Add to Favourites ♡ ' : 'Remove From Favourites ♡ '}
+                                        onClick={handelAddToFavourite}
+                                        style={secondaryButtonStyle}
+                                        />
                                         <p>Unlimited Credits</p>
                                     </div>
                                 </div>
@@ -124,5 +128,8 @@ const DetailTopic = ({onFavouriteTopics}) => {
         </>
     )
 }
+
+
+
 
 export default DetailTopic;

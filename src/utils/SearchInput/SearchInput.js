@@ -1,8 +1,8 @@
 
-import './SearchBox.css'
+import './SearchInput.css'
 import {useState} from "react";
 
-const SearchBox = ({onSearchQuery, onSortTopics, onFilterTopics, filteredTopics, topics}) => {
+const SearchInput = ({onSearchQuery, onSortTopics, onFilterTopics, filteredTopics, topics}) => {
 
     const [searchInputValue, setSearchIInputValue] = useState('');
 
@@ -73,4 +73,4 @@ const SearchBox = ({onSearchQuery, onSortTopics, onFilterTopics, filteredTopics,
 }
 
 
-export default SearchBox;
+export default SearchInput;

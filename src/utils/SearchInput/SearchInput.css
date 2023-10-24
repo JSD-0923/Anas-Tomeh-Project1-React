@@ -1,4 +1,6 @@
-
+.search-box {
+    padding-top: 15px;
+}
 
 label{
     font-size: var(--sm);
@@ -81,7 +83,7 @@ select{
 @media screen and (min-width: 425px) and (max-width: 768px) {
 
     .search-box input {
-        min-width: 310px;
+        min-width: 365px;
     }
     .search-dropdown-list {
         border-top: none;

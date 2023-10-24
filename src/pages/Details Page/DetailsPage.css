@@ -91,19 +91,6 @@
     font-weight: var(--font-weight-light);
 }
 
-.add-to-favorite-box button {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    border: 1px solid var(--lines-color-var);
-    border-radius: 4px;
-    width: 80%;
-    cursor: pointer;
-    background-color: var(--brand-secondry-color);
-    color: var(--lines-color-var);
-    font-size: 14px;
-}
-
 .add-to-favorite-box p{
     color: #949494;
     font-weight: var(--font-weight-light);
