@@ -1,6 +1,7 @@
 
 import './SearchBox.css'
 import {useState} from "react";
+import SearchIcon from "../../assets/Icons/SearchIcon";
 
 const SearchBox = ({onSearchQuery, onSortTopics, onFilterTopics, filteredTopics, topics}) => {
 
@@ -39,9 +40,7 @@ const SearchBox = ({onSearchQuery, onSortTopics, onFilterTopics, filteredTopics,
     return (
         <section className="search-box" aria-label="search box">
             <form id={'search-box'}>
-                <button className="button" aria-label="search">
-                    🔎
-                </button>
+                <SearchIcon color={'var(--body-text-var)'}/>
                 <label className="searchInput" htmlFor="searchInput"></label>
                 <input
                     placeholder="Search the website..."
