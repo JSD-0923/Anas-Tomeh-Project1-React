@@ -1,6 +1,7 @@
 const SearchIcon = (props) => {
     const {color, width, height} = props
     return (
+        <div style={{ margin: '10px' }}>
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width={width || '16px'}
              height={height || '16px'}
@@ -9,6 +10,7 @@ const SearchIcon = (props) => {
                   fill={color || "black"}>
             </path>
         </svg>
+        </div>
 
     )
 }
