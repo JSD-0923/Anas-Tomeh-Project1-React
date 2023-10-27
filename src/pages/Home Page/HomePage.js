@@ -7,33 +7,24 @@ import LoadingIndicator from "../../utils/LoadingIndicator/LoadingIndicator";
 import Error from "../../utils/Error/Error";
 import TopicCard from "../../components/Cards/TopicCard/TopicCard";
 import TopicList from "../../components/TopicList/TopicList";
+import useApi from "../../Hooks/useApi";
 
 const HomePage = () => {
 
-    const [topics, setTopics] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
+    const [topics, setTopics] = useState(null)
     const [searchQuery, setSearchQuery] = useState('')
     const [sortBy, setSortBy] = useState('default');
     const [filterBy, setFilterBy] = useState('default');
     const [filteredTopics, setFilteredTopics] = useState([])
 
+    const { data, isLoading, isError } = useApi(`https://tap-web-1.herokuapp.com/topics/list?phrase=${searchQuery}`)
+
+    useEffect(()=>{
+        setTopics(data)
+        setFilteredTopics(data)
+    }, [data])
     const handleSearchQuery = (searchInputValue) => {
         setSearchQuery(searchInputValue);
-    };
-    const fetchTopics = async () => {
-        try {
-            const response = await fetch(
-                `https://tap-web-1.herokuapp.com/topics/list?phrase=${searchQuery}`);
-            let result = await response.json();
-            setTopics(result)
-            setFilteredTopics(result)
-
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-            setError(true)
-        }
     };
 
     const handelSortTopics = (sortBy) => {
@@ -41,20 +32,23 @@ const HomePage = () => {
     }
 
     const sortingTopics = () => {
+        let sortedTopics = [...filteredTopics];
 
-        let sortedTopics = [...filteredTopics]
-        if (sortBy === 'default') {
-            sortedTopics.sort((a, b) => a.id - b.id);
-        }
-        else if (sortBy === "topic-title") {
-            sortedTopics.sort((a, b) => a.topic.localeCompare(b.topic));
-        }
-        else if (sortBy === "author-name") {
-            sortedTopics.sort((a, b) => a.name.localeCompare(b.name));
+        switch (sortBy) {
+            case 'default':
+                sortedTopics.sort((a, b) => a.id - b.id);
+                break;
+            case 'topic-title':
+                sortedTopics.sort((a, b) => a.topic.localeCompare(b.topic));
+                break;
+            case 'author-name':
+                sortedTopics.sort((a, b) => a.name.localeCompare(b.name));
+                break;
         }
 
-        setFilteredTopics(sortedTopics)
+        setFilteredTopics(sortedTopics);
     }
+
 
     const handelFilterTopics = (filterBy) => {
         setFilterBy(filterBy)
@@ -67,9 +61,6 @@ const HomePage = () => {
         setFilteredTopics(filteredTopics)
     }
 
-    useEffect(() => {
-        fetchTopics()
-    }, [searchQuery])
 
     useEffect(() => {
         sortingTopics()
@@ -80,6 +71,7 @@ const HomePage = () => {
     }, [filterBy])
 
     return (
+        topics &&
         <div className="page-container">
         <div className={'home-page-container'}>
             <SearchInput
@@ -90,11 +82,11 @@ const HomePage = () => {
                 onFilterTopics={handelFilterTopics}
             />
             <VerticalSpace />
-            {loading && <LoadingIndicator message={'Topics are Loading ...'}/>}
-            {error && <Error message={'Something went wrong. Web topics failed to load'}/>}
-            {!loading && <h2 className="number-of-results">{topics.length > 0 ? `"${topics.length}" Web Topics Found`: 'No Topics Found !!'}</h2>}
+            {isLoading && <LoadingIndicator message={'Topics are Loading ...'}/>}
+            {isError && <Error message={'Something went wrong. Web topics failed to load'}/>}
+            {!isLoading && <h2 className="number-of-results">{topics.length > 0 ? `"${topics.length}" Web Topics Found`: 'No Topics Found !!'}</h2>}
             {topics.length > 0
-                && !error
+                && !isError
                 && <TopicList topics={filteredTopics}
                 />
             }
