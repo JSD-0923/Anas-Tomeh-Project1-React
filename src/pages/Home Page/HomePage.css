@@ -1,11 +1,18 @@
 
-
-
-
-.main {
+.page-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    height: 80vh;
+}
+
+.vertical-space {
+    height: 20px;
+}
+
+.number-of-results {
+    margin: 0 0 16px 16px;
+    padding-left: 20px;
+    color: var(--body-text-var);
+    align-self: flex-start;
 }
 

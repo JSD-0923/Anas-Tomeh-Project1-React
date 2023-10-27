@@ -5,28 +5,22 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Error from "../../utils/Error/Error";
 import LoadingIndicator from "../../utils/LoadingIndicator/LoadingIndicator";
+import Button from "../../utils/Button/Button";
+import {buttonCustomStyle, secondaryButtonStyle} from "../../utils/Button/ButtonStyles";
+import useApi from "../../Hooks/useApi";
 const DetailTopic = ({onFavouriteTopics}) => {
 
     const [topic, setTopic] = useState()
     const [favouriteTopics, setFavouriteTopics] = useState([]);
     const [inFavourite, setInFavourite] = useState(false)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
 
     const { id } = useParams();
 
-    const fetchTopic = async () => {
+    const { data, isLoading, isError } = useApi(`https://tap-web-1.herokuapp.com/topics/details/${id}`)
 
-        try {
-            const response = await fetch(`https://tap-web-1.herokuapp.com/topics/details/${id}`);
-            let result = await response.json();
-            setTopic(result)
-            setLoading(false)
-        } catch (error) {
-            setError(true)
-            setLoading(false)
-        }
-    };
+    useEffect(()=>{
+        setTopic(data)
+    }, [data])
 
     const storedFavouriteTopics = JSON.parse(localStorage.getItem('favouriteTopics')) || [];
     const handelAddToFavourite = () => {
@@ -45,12 +39,11 @@ const DetailTopic = ({onFavouriteTopics}) => {
     useEffect(() => {
         const storedFavouriteTopics = JSON.parse(localStorage.getItem('favouriteTopics')) || [];
         setFavouriteTopics(storedFavouriteTopics);
-        fetchTopic()
     },[])
 
     return (
         <>
-            {loading && <LoadingIndicator message={'Topic is Loading ...'}/>}
+            {isLoading && <LoadingIndicator message={'Topic is Loading ...'}/>}
             <div>
                 {topic &&
                     <div className="details-section-content">
@@ -74,9 +67,11 @@ const DetailTopic = ({onFavouriteTopics}) => {
                                     <h2 className={'details-author-name'}>{topic.topic} by <a>{topic.name}</a></h2>
                                     <div className="add-to-favorite-box">
                                         <h2>Interested about this topic?</h2>
-                                        <button id="add-to-favourite" onClick={handelAddToFavourite}>
-                                            {!isTopicInFavourites ? 'Add to Favourites ♡ ' : 'Remove From Favourites ♡ '}
-                                        </button>
+                                        <Button
+                                        label={!isTopicInFavourites ? 'Add to Favourites ♡ ' : 'Remove From Favourites ♡ '}
+                                        onClick={handelAddToFavourite}
+                                        style={secondaryButtonStyle}
+                                        />
                                         <p>Unlimited Credits</p>
                                     </div>
                                 </div>
@@ -120,9 +115,12 @@ const DetailTopic = ({onFavouriteTopics}) => {
                     </div>
                 }
             </div>
-            {error && <Error message={'Something went wrong. Web topics failed to load'}/>}
+            {isError && <Error message={'Something went wrong. Web topics failed to load'}/>}
         </>
     )
 }
+
+
+
 
 export default DetailTopic;

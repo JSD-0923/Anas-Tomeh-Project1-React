@@ -3,9 +3,6 @@ import './Header.css'
 import '../../css/varibels.css'
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import MoonIcon from "../../assets/Icons/MoonIcon";
-import SunIcon from "../../assets/Icons/SunIcon";
-import HeartIcon from "../../assets/Icons/HeartIcon";
 const Header = ({toggleDarkMode, isDarkModeTheme, onShowModal}) => {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -35,11 +32,11 @@ const Header = ({toggleDarkMode, isDarkModeTheme, onShowModal}) => {
                </Link>
                 <div className="header-btns">
                         <button className="button"  aria-label="dark mode" onClick={handleDarkModeToggle}>
-                            {!isDarkMode ? <MoonIcon height={'20px'}/> : <SunIcon/>}  {screenWidth < 425 ? '' :  !isDarkMode ? 'Dark Mode' : 'Light Mode'}
+                            {!isDarkMode ? '☾' : '☼'}  {screenWidth < 425 ? '' :  !isDarkMode ? 'Dark Mode' : 'Light Mode'}
                         </button>
 
                         <button className="button" aria-label="favourite" onClick={handleDisplayingModalLocal} >
-                            <HeartIcon width={'20px'}/> {screenWidth < 425 ? '' : 'Favourites'}
+                            ♡ {screenWidth < 425 ? '' : 'Favourites'}
                         </button>
                 </div>
             </div>
