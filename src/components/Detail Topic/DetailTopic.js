@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom";
 import Error from "../../utils/Error/Error";
 import LoadingIndicator from "../../utils/LoadingIndicator/LoadingIndicator";
 import Button from "../../utils/Button/Button";
-import {buttonCustomStyle, secondaryButtonStyle} from "../../utils/Button/ButtonStyles";
+import {secondaryButtonStyle} from "../../utils/Button/ButtonStyles";
 import useApi from "../../Hooks/useApi";
 const DetailTopic = ({onFavouriteTopics}) => {
 

@@ -3,6 +3,7 @@ import './TopicCard.css'
 
 import VerticalSpace from "../../../utils/VerticalSpace";
 import {Link} from "react-router-dom";
+import RatingBar from "../../RatingBar/RatingBar";
 
 const TopicCard = ({topic}) => {
 
@@ -17,7 +18,7 @@ const TopicCard = ({topic}) => {
                            <h2 className="topic-category">{topic.category}</h2>
                            <p className="topic-name">{topic.topic}</p>
                            <div className="rating-stars">
-                               <p>★★★★★</p>
+                               <RatingBar rating={topic.rate}/>
                            </div>
                            <footer>
                                <p className="author-name">Author: {topic.name}</p>

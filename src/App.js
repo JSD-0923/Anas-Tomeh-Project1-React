@@ -7,17 +7,15 @@ import {useEffect, useState} from "react";
 import Modal from "./utils/Modal/Modal";
 import FavouriteTopicCard from "./components/Cards/FavouriteTopicCard/FavouriteTopicCard";
 import NotFoundPage from "./pages/Not Found Page/NotFoundPage";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import WelcomeBar from "./components/WelcomeBar/WelcomeBar";
 import {useTheme} from "./contexts/ThemeContext";
+import PrimaryLayout from "./layouts/PrimaryLayout/PrimaryLayout";
 
 function App() {
 
     const [favouriteTopics, setFavouriteTopics] = useState([]);
-    const [modalShow, setModalShow] = useState(false)
 
     const {theme} = useTheme()
+
     const handelFavouriteTopics = (topic) => {
         const isTopicInFavourites = favouriteTopics.some((storedTopic) => {
             if (topic) {
@@ -36,41 +34,24 @@ function App() {
         }
     };
 
-
-    const handleDisplayingModal = (modalShow) => {
-        setModalShow(modalShow)
-    }
-
-
     useEffect(() => {
         const storedFavouriteTopics = JSON.parse(localStorage.getItem('favouriteTopics')) || [];
         setFavouriteTopics(storedFavouriteTopics);
     }, []);
-
-
     return (
         <div className={theme}>
             <BrowserRouter>
-            <Header
-                onShowModal={handleDisplayingModal}
-            />
-            <WelcomeBar/>
-
                 <Routes>
-                    {/*Anas-Tomeh-Project1-React is added for the path for deploying using GitHub pages*/}
-                    <Route exact path="Anas-Tomeh-Project1-React/" element={<HomePage/>}
-                    />
-                    {/*Anas-Tomeh-Project1-React is added for the path for deploying using GitHub pages*/}
-                    <Route exact path="Anas-Tomeh-Project1-React/details/:id" element={<DetailsPage onFavouriteTopics={handelFavouriteTopics}/>}
-                    />
-                    <Route path="*" element={<NotFoundPage/>} />
+                    <Route path={'/'} element={<PrimaryLayout favouriteTopics={favouriteTopics}/>}>
+                        <Route exact path="/" element={<HomePage/>}
+                        />
+                        {/*Anas-Tomeh-Project1-React is added for the path for deploying using GitHub pages*/}
+                        <Route exact path="/details/:id" element={<DetailsPage onFavouriteTopics={handelFavouriteTopics}/>}
+                        />
+                        <Route path="*" element={<NotFoundPage/>} />
+                    </Route>
                 </Routes>
 
-
-            <Footer/>
-            <Modal isOpen={modalShow} title={'My Favourite Topics'}>
-                <FavouriteTopicCard favouriteTopics={favouriteTopics}/>
-            </Modal>
             </BrowserRouter>
         </div>
     );

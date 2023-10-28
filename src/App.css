@@ -27,7 +27,6 @@ a {
 
 body {
     font-family: 'Nunito Sans', sans-serif;
-    background-color: var(--background-body);
     overflow-x: hidden;
     min-height: 100vh;
     display: flex;
@@ -46,7 +45,7 @@ body {
 }
 
 
-/*Dark Mode colors*/
+/*Light Mode colors*/
 .light {
     --brand-primary-color: var(--brand-primary);
     --brand-secondry-color: var(--brand-secondary);

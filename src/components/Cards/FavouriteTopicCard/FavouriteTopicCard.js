@@ -1,5 +1,6 @@
 
 import './FavouriteTopicCard.css'
+import RatingBar from "../../RatingBar/RatingBar";
 const FavouriteTopicCard = ({favouriteTopics}) => {
 
     return (
@@ -12,7 +13,7 @@ const FavouriteTopicCard = ({favouriteTopics}) => {
                      <div className="favorite-topic-card-body">
                          <h3>{topic.topic}</h3>
                          <div className="rating-stars">
-                             <p>★★★★★</p>
+                             <RatingBar rating={topic.rate}/>
                          </div>
                      </div>
                  </section>
