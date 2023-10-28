@@ -5,7 +5,6 @@ import SearchInput from "../../utils/SearchInput/SearchInput";
 import VerticalSpace from "../../utils/VerticalSpace";
 import LoadingIndicator from "../../utils/LoadingIndicator/LoadingIndicator";
 import Error from "../../utils/Error/Error";
-import TopicCard from "../../components/Cards/TopicCard/TopicCard";
 import TopicList from "../../components/TopicList/TopicList";
 import useApi from "../../Hooks/useApi";
 
@@ -71,11 +70,11 @@ const HomePage = () => {
     }, [filterBy])
 
     return (
-        topics &&
+
         <div className="page-container">
         <div className={'home-page-container'}>
             <SearchInput
-                topics={topics}
+                topics={topics?topics:[]}
                 filteredTopics={filteredTopics}
                 onSearchQuery={handleSearchQuery}
                 onSortTopics={handelSortTopics}
@@ -84,8 +83,8 @@ const HomePage = () => {
             <VerticalSpace />
             {isLoading && <LoadingIndicator message={'Topics are Loading ...'}/>}
             {isError && <Error message={'Something went wrong. Web topics failed to load'}/>}
-            {!isLoading && <h2 className="number-of-results">{topics.length > 0 ? `"${topics.length}" Web Topics Found`: 'No Topics Found !!'}</h2>}
-            {topics.length > 0
+            {topics && !isLoading && <h2 className="number-of-results">{topics.length > 0 ? `"${topics.length}" Web Topics Found`: 'No Topics Found !!'}</h2>}
+            {topics && topics.length > 0
                 && !isError
                 && <TopicList topics={filteredTopics}
                 />

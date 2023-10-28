@@ -6,18 +6,15 @@ import {Link} from "react-router-dom";
 import WelcomeBar from "../WelcomeBar/WelcomeBar";
 import Button from "../../utils/Button/Button";
 import {primaryButtonStyles} from "../../utils/Button/ButtonStyles";
+import {useTheme} from "../../contexts/ThemeContext";
 const Header = (props) => {
 
-    const {toggleDarkMode, isDarkModeTheme, onShowModal} = props
+    const { onShowModal} = props
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [isDarkMode, setIsDarkMode] = useState(isDarkModeTheme);
     const [modalShow, setModalShow] = useState(false)
 
-    const handleDarkModeToggle = () => {
-        toggleDarkMode();
-        setIsDarkMode(!isDarkMode)
-    }
+    const {theme ,toggleDarkMode } = useTheme();
 
     const handleDisplayingModalLocal = () => {
         setModalShow(!modalShow)
@@ -29,7 +26,6 @@ const Header = (props) => {
 
     }, [])
 
-
     return (
         <header className="header">
             <div className="header-container">
@@ -39,9 +35,9 @@ const Header = (props) => {
 
                 <div className="header-btns">
                     <Button
-                    label={`${!isDarkMode ? '☾' : '☼'} ${screenWidth < 425 ? '' :  !isDarkMode ? 'Dark Mode' : 'Light Mode'}`}
+                    label={`${theme === 'dark' ? '☾' : '☼'} ${screenWidth < 425 ? '' :  theme === 'dark' ? 'Dark Mode' : 'Light Mode'}`}
                     ariaLabel={"dark mode"}
-                    onClick={handleDarkModeToggle}
+                    onClick={toggleDarkMode}
                     style={primaryButtonStyles}
                     />
 

@@ -45,8 +45,21 @@ body {
 
 }
 
+
 /*Dark Mode colors*/
-.dark-mode {
+.light {
+    --brand-primary-color: var(--brand-primary);
+    --brand-secondry-color: var(--brand-secondary);
+    --background-default : var(--bg_default);
+    --background-body: var(--pg_body);
+    --lines-color-var: var(--lines-color);
+    --body-text-var: var(--body-text);
+}
+
+/*Dark Mode colors*/
+.dark {
+    --brand-primary-color: var(--brand-primary);
+    --brand-secondry-color: var(--brand-secondary);
     --background-default : var(--bg_default-dark-mode);
     --background-body: var(--bg_body-dark-mode);
     --lines-color-var: var(--lines-color-dark-mode);

@@ -10,15 +10,14 @@ import NotFoundPage from "./pages/Not Found Page/NotFoundPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import WelcomeBar from "./components/WelcomeBar/WelcomeBar";
+import {useTheme} from "./contexts/ThemeContext";
 
 function App() {
 
-    const body = document.body;
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    const [isDarkModeTheme, setIsDarkModeTheme] = useState(true);
     const [favouriteTopics, setFavouriteTopics] = useState([]);
     const [modalShow, setModalShow] = useState(false)
 
+    const {theme} = useTheme()
     const handelFavouriteTopics = (topic) => {
         const isTopicInFavourites = favouriteTopics.some((storedTopic) => {
             if (topic) {
@@ -46,27 +45,13 @@ function App() {
     useEffect(() => {
         const storedFavouriteTopics = JSON.parse(localStorage.getItem('favouriteTopics')) || [];
         setFavouriteTopics(storedFavouriteTopics);
-        if (isDarkMode) {
-            body.classList.add('dark-mode');
-        } else {
-            body.classList.remove('dark-mode');
-            setIsDarkModeTheme(false)
-        }
     }, []);
 
-    const toggleDarkMode = () => {
-        const body = document.body;
-        body.classList.toggle('dark-mode');
-        const isDarkMode = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDarkMode.toString());
-    };
 
     return (
-        <>
+        <div className={theme}>
             <BrowserRouter>
             <Header
-                toggleDarkMode={toggleDarkMode}
-                isDarkModeTheme={isDarkModeTheme}
                 onShowModal={handleDisplayingModal}
             />
             <WelcomeBar/>
@@ -87,7 +72,7 @@ function App() {
                 <FavouriteTopicCard favouriteTopics={favouriteTopics}/>
             </Modal>
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 

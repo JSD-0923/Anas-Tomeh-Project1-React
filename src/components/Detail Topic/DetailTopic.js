@@ -18,7 +18,6 @@ const DetailTopic = ({onFavouriteTopics}) => {
 
     const { data, isLoading, isError } = useApi(`https://tap-web-1.herokuapp.com/topics/details/${id}`)
 
-    console.log(data)
     useEffect(()=>{
         setTopic(data)
     }, [data])
